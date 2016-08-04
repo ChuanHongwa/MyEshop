@@ -53,6 +53,16 @@ class myController extends Controller
         return "部落格";
     }
     
+    public function blog_list()
+    {
+        return view("blog_list");
+    }
+    
+    public function blog_single()
+    {
+        return view("blog_single");
+    }
+    
     public function blog_post()
     {
         return "部落格信箱";
