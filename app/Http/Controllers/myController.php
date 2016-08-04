@@ -20,7 +20,7 @@ class myController extends Controller
     
     public function login()
     {
-        return "登入";
+        return view("login");
     }
     
     public function logout()
@@ -65,12 +65,12 @@ class myController extends Controller
     
     public function cart()
     {
-        return "購物車";
+        return view("cart");
     }
     
     public function checkout()
     {
-        return "確認";
+        return view("checkout");
     }
     
     
