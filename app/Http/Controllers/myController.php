@@ -15,7 +15,7 @@ class myController extends Controller
     
     public function contact_us()
     {
-        return "聯絡我們";
+        return view("contact_us");
     }
     
     public function login()
@@ -30,7 +30,7 @@ class myController extends Controller
     
     public function products()
     {
-        return "商品";
+        return view("products");
     }
     
     public function products_category()
@@ -45,7 +45,7 @@ class myController extends Controller
     
     public function products_details()
     {
-        return "商品明細";
+        return view("products_details");
     }
     
     public function blog()
