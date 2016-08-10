@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>@yield("title")</title>
+    <title>{{$title}} | E-Shopper</title>
     
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
@@ -113,15 +113,22 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="{{url('/')}}" class="active">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+								<li><a href="{{url('/')}}" {{$title == "Home" ? "class=active" : ""}}>Home</a></li>
+								
+<!--
+								{{$title == ("Products" || "Products_Details")
+                                    ? "class=active" : ""}}
+-->
+								
+								
+								<li class="dropdown"><a href="#" {{($title == "Products" || $title == "Products_Details") ? "class=active" : ""}}>Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="{{url('/products')}}">Products</a></li>
+                                        <li><a href="{{url('/products')}}" >Products</a></li>
 										<li><a href="{{url('/products/details/{id}')}}">Product Details</a></li> 
 										
                                     </ul>
                                 </li> 
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+								<li class="dropdown"><a href="#" {{($title == "Blog_List" || $title == "Blog_Single") ? "class=active" : ""}}>Blog<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="{{url('/blog_list')}}">Blog List</a></li>
 										<li><a href="{{url('/blog_single')}}">Blog Single</a></li>

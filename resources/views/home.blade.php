@@ -1,6 +1,5 @@
 @extends("layouts.main")
 
-@section("title", "Home | E-Shopper")
 
 @section("content")
 
