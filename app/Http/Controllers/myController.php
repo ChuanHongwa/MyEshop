@@ -65,7 +65,7 @@ class myController extends Controller
     
     public function blog_post()
     {
-        return "部落格信箱:$i";
+        return view("blog_single", ["title" => "Blog_Single"]);
     }
     
     public function search()

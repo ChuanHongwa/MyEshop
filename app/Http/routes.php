@@ -37,7 +37,7 @@ Route::get("/blog_list","myController@blog_list");
 
 Route::get("/blog_single","myController@blog_single");
 
-Route::get("/blog/post/{id}","myController@blog_post");
+Route::get("/blog/post/{i}","myController@blog_post");
 
 Route::get("/search/{key_word}","myController@search");
 
