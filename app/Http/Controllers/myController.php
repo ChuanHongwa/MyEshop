@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
+use Request;
 use App\Http\Requests;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -91,14 +92,59 @@ class myController extends Controller
         return "搜尋";
     }
     
-    public function cart()
+   public function cart(Request $request) {
+        if (Request::isMethod('post')) {
+            $product_id = Request::get('product_id');
+            $product = Product::find($product_id);
+            Cart::add(array('id' => $product_id, 'name' => $product->name, 'qty' => 1, 'price' => $product->price));
+        }
+       
+        if( Request::get("product_id") && (Request::get("add") == 1))
+        {
+            $items = Cart::Search(function ($cartItem, $rowId) { return $cartItem->id == Request::get("product_id");});
+            Cart::update($items->first()->rowId, $items->first()->qty + 1);
+        }
+
+        if( Request::get("product_id") && (Request::get("minus") == 1))
+        {
+            $items = Cart::Search(function ($cartItem, $rowId) { return $cartItem->id == Request::get("product_id");});
+            Cart::update($items->first()->rowId, $items->first()->qty - 1);
+        }
+       
+        if( Request::get("product_id") && (Request::get("clear") == 1))
+        {
+            $items = Cart::Search(function ($cartItem, $rowId) { return $cartItem->id == Request::get("product_id");});
+            Cart::remove($items->first()->rowId);
+        }
+       
+    
+        $cart = Cart::content();
+       
+
+        return view("cart", ["title" => "Cart", "comments" => "網頁說明", "cart" => $cart]);
+    }
+  
+  public function cart_add(Request $request)
     {
-        return view("cart", ["title" => "Cart"]);
+        $product_id = Request::get("product_id");
+        $product = \App\Product::find($product_id);
+
+        Cart::add(["id" => $product_id,
+                    "name" => $product->name,
+                    "qty" => 1,
+                    "price" => $product->price]);
+
+        $cart = Cart::content();
+
+//        return view("cart", ["cart" => $cart, "title" => "Cart", "description" => "網頁說明"]);
+        return Redirect::to("cart")->with(["cart_from_server" => $cart, "title" => "Cart", "" => "網頁說明"]);
     }
     
-    public function cart_add()
+    public function clear_cart()
     {
-        return "增加到購物車";
+        Cart::destroy();
+
+        return Redirect::to("cart");
     }
     
     public function checkout()
