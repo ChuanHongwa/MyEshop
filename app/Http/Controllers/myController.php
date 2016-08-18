@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Redirect;
+
+
 class myController extends Controller
 {
     var $products;
@@ -44,7 +48,7 @@ class myController extends Controller
     
     public function products()
     {
-        return view("products", ["title" => "Products"]);
+        return view("products", ["title" => "Products","products" => $this->products, "category" => $this->category, "brands" => $this->brands]);
     }
     
     public function products_category()
@@ -92,10 +96,24 @@ class myController extends Controller
         return view("cart", ["title" => "Cart"]);
     }
     
+    public function cart_add()
+    {
+        return "增加到購物車";
+    }
+    
     public function checkout()
     {
         return view("checkout", ["title" => "Checkout"]);
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 
